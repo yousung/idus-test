@@ -2,11 +2,11 @@ FROM php:7.4-fpm-alpine
 
 ADD ./www.conf /usr/local/etc/php-fpm.d/www.conf
 
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
+RUN addgroup -g 1000 idus && adduser -G idus -g idus -s /bin/sh -D idus
 
 RUN mkdir -p /var/www/html
 
-RUN chown laravel:laravel /var/www/html
+RUN chown idus:idus /var/www/html
 
 WORKDIR /var/www/html
 

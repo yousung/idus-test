@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['M', 'F'])->nullable()->comment('성별');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

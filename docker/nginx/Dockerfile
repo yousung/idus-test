@@ -4,6 +4,6 @@ ADD ./nginx.conf /etc/nginx/nginx.conf
 ADD ./default.conf /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /var/www/html
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
+RUN addgroup -g 1000 idus && adduser -G idus -g idus -s /bin/sh -D idus
 
-RUN chown laravel:laravel /var/www/html
+RUN chown idus:idus /var/www/html

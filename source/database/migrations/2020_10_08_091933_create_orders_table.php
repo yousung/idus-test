@@ -16,11 +16,14 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('user_id')->comment('주문자 ID')->constrained();
             $table->string('order', 12)->comment('주문번호');
             $table->string('name', 100)->comment('제품명');
-            $table->dateTime('settlement_at')->comment('결제일');
+            $table->timestamp('settlement_at')->comment('결제일');
+
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
