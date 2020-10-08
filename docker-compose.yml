@@ -1,0 +1,60 @@
+version: '2'
+
+networks:
+  laravel:
+
+services:
+  mysql:
+    image: library/mysql:5.7.31
+    container_name: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: ./docker/php
+    container_name: php
+    volumes:
+      - './source:/var/www/html'
+    ports:
+      - '9000:9000'
+    networks:
+      - laravel
+
+  api:
+    build:
+      context: ./docker/nginx
+    container_name: api
+    ports:
+      - '8080:80'
+    volumes:
+      - './source:/var/www/html'
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  composer:
+    build:
+      context: ./docker/compose
+    container_name: composer
+    volumes:
+      - "./source:/var/www/html"
+    working_dir: "/var/www/html"
+    depends_on:
+      - php
+    user: laravel
+    networks:
+      - laravel
+    entrypoint: ['composer', '--no-scripts', '--ignore-platform-reqs']
