@@ -35,6 +35,8 @@
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/league/commonmark" />
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/source/vendor/mnabialek/laravel-sql-logger" />
+      <excludeFolder url="file://$MODULE_DIR$/source/vendor/mnabialek/laravel-version" />
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/source/vendor/myclabs/deep-copy" />

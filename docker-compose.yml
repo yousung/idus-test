@@ -53,7 +53,7 @@ services:
     user: idus
     networks:
       - idus
-    entrypoint: ['composer', '--no-scripts', '--ignore-platform-reqs']
+    entrypoint: ['composer', '-o']
 
   artisan:
     build:

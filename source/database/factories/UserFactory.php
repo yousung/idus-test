@@ -27,10 +27,10 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name($gender[$randGender]),
             'nickname' => $this->faker->userName,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '!password1',
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
-            'gender' => User::GENDER[$randGender],
+            'gender' => rand(0, 1) ? User::GENDER[$randGender] : null,
         ];
     }
 }

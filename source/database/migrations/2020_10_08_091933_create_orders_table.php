@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
 
             $table->foreignId('user_id')->comment('주문자 ID')->constrained();
-            $table->string('order', 12)->comment('주문번호');
+            $table->string('order_id', 12)->comment('주문번호');
             $table->string('name', 100)->comment('제품명');
             $table->timestamp('settlement_at')->comment('결제일');
 

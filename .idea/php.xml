@@ -115,9 +115,11 @@
       <path value="$PROJECT_DIR$/source/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/source/vendor/tymon/jwt-auth" />
       <path value="$PROJECT_DIR$/source/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/source/vendor/mnabialek/laravel-version" />
+      <path value="$PROJECT_DIR$/source/vendor/mnabialek/laravel-sql-logger" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/source/vendor/autoload.php" />

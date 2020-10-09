@@ -11,3 +11,5 @@ RUN chown idus:idus /var/www/html
 WORKDIR /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql
+
+RUN docker-php-ext-enable opcache;
