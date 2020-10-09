@@ -9,7 +9,7 @@ services:
     container_name: mysql
     restart: always
     ports:
-      - '3306:3306'
+      - '33060:3306'
     environment:
       MYSQL_DATABASE: idus
       MYSQL_USER: idus
