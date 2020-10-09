@@ -31,6 +31,6 @@ class UserController extends Controller
      */
     public function show(User $user):JsonResponse
     {
-        return makeJson($user->load('orders'));
+        return makeJson($user);
     }
 }

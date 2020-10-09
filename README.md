@@ -9,6 +9,7 @@
  6. DB replication 은 구성할 필요가 없다고하여서 구성은 하지 않고 설정 (.env) 파일에 설정을 남겨두었습니다. 
  (READ_DB_HOST 등등)
  7. 테스트 코드는 통합테스트 일부만 작성하였습니다. (유닛테스트 생략 / 회원가입만 테스트) 하였습니다.
+ 8. 회원 가입시 이메일 인증 및 비밀번호 확인 작업은 생략하였습니다.
 
 ### INSTALL
 ```shell script
@@ -22,11 +23,175 @@ $ docker-compose run --rm composer install
 $ docker-compose run --rm artisan migrate --seed 
 # or docker-compose run --rm artisan migrate:refresh --seed
 
-#4. 확인
+#4. Route Cache
+$ docker-compose run --rm artisan route:cache
+
+#5. 확인
 # http://localhost:8080  
 
-#5. TEST
+#6. TEST
 $ docker-compose run --rm artisan test
+```
+
+### API ROUTE LIST
+```shell script
+# route list 확인
+$ docker-compose run --rm artisan route:lsit
+```
+
+### API DOCUMENT
+##### WEB
+```php
+// welcome page
+GET : /
+
+// php info page # 실무에서는 절대 노출해서는 안되는 페이지이지만 스펙 확인을 위해 노출
+GET : /info
+```
+##### API
+###### AUTH
+```javascript 1.8
+HEADER COMMON : {
+ 'Accept' : 'application/json',
+ 'Content-Type' : 'application/json',
+}
+
+// 회원가입
+POST : /auth/join
+PARAM : {
+    'name' : 'required',
+    'nickname' : 'required',
+    'password' : 'required',
+    'phone' : 'required',
+    'email' : 'required',
+    'gender' : 'optinal' // (F, M, null) 성별
+}
+RESULT : {
+  "id": 1,
+  "name": "아이디어스",
+  "nickname": "nickname",
+  "phone": "01012341234",
+  "email": "idus@gmail.com",
+  "gender": "M",
+  "updated_at": "2020-10-09 11:34:31",
+  "created_at": "2020-10-09 11:34:31",
+  "status": 201
+}
+
+
+// 로그인
+POST : /auth/login
+PARAM : {
+  'email' : 'required',
+  'password' : 'required'
+}
+RESULT : {
+    "access_token": "eyJ0eXAiO..중략..Izevk7pWMSuVZ_6M",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "status": 200
+}
+
+// 로그인 본인 정보 확인
+GET : /auth/me
+HEADER : {
+   "Authorization" : `Bearer ${TOKEN}` 
+}
+RESULT : {
+      "id": 1,
+      "name": "아이디어스",
+      "nickname": "nickname",
+      "phone": "01012341234",
+      "email": "idus@gmail.com",
+      "gender": "M",
+      "updated_at": "2020-10-09 11:34:31",
+      "created_at": "2020-10-09 11:34:31",
+      "status": 200
+      "orders": []
+}
+
+// 로그아웃
+POST : /auth/logout
+HEADER : {
+   "Authorization" : `Bearer ${TOKEN}` 
+}
+RESULT : {
+   "message": "Successfully logged out",
+   "status": 200
+}
+```
+
+
+##### USERS
+```javascript 1.8
+HEADER COMMON : {
+ 'Accept' : 'application/json',
+ 'Content-Type' : 'application/json',
+ "Authorization" : `Bearer ${TOKEN}`
+}
+
+// 회원 리스트
+GET : /api/users 
+PARAM : {
+    'limit' : 'optinal', // (integer or null)'  페이지당 표시할 인원 (기본 15)
+    'page' : 'optinal', // (integer) 페이지
+    'orderBy' : 'optinal', // (id, name, created_at 등등) 정렬 기준 ASC 고정 (기본 : name)
+    'search' : 'optinal', // 이름 또는 이메일 검색 이름의 경우 한글자라도 겹치면 검색, 이메일은 완전 일치 검색 ( page 주의!!)
+}
+RESULT : [
+{
+    "id": 20,
+    "name": "권유정",
+    "phone": "05715923243",
+    "email": "jimin.cho@example.com",
+    "gender": null,
+    "last_order": {  // 요구사항 각 회원의 마지막 주문정보
+        "id": 188,
+        "name": "DarkKhaki-slu",
+        "user_id": 20,
+        "order_id": "ndlQMOPbeztj",
+        "settlement_at": "2020-10-08 04:21:32",
+        "created_at": "2020-10-09 09:10:08",
+        "updated_at": "2020-10-09 09:10:08"
+    },
+    "created_at": "2020-10-09 20:53:51",
+    "updated_at": "2020-10-09 20:53:51"
+},
+...
+]
+
+
+// 단일 회원 상세 정보 조회
+GET /api/user/[USER_ID]
+RESULT : {
+     "id": 20,
+     "name": "권유정",
+     "nickname": "darkgreen",
+     "phone": "05715923243",
+     "email": "jimin.cho@example.com",
+     "gender": null,
+     "created_at": "2020-10-09 09:10:08",
+     "updated_at": "2020-10-09 09:10:08",
+     "status": 200
+}
+
+// 단일 회원 주문 목록 조회 (요구사항에 없어서 페이지네이션 처리하지 않음)
+GET /api/user/[USER_ID]/orders
+RESULT : {
+    "orders": [
+    {
+        "id": 185,
+        "user_id": 20,
+        "order_id": "cyaLgUuAiTWK",
+        "name": "LightGoldenRodYellow-g0W",
+        "settlement_at": "2020-07-13 03:38:54",
+        "created_at": "2020-10-09 09:10:08",
+        "updated_at": "2020-10-09 09:10:08",
+    }
+  ],
+  "status": 200
+}
+
 ```
 
 ### DATABASE SCHEMA

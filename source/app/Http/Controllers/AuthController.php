@@ -16,7 +16,7 @@ class AuthController extends Controller
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
-        $this->middleware('auth:api')->only(['logout']);
+        $this->middleware('auth:api')->only(['logout', 'me']);
     }
 
     /**

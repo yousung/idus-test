@@ -11,7 +11,7 @@ Route::post('join', [AuthController::class, 'join'])->name('auth.join');
 // 로그인
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 // 로그인 회원 단일 정보
-Route::post('me', [AuthController::class, 'me'])->name('auth.me');
+Route::get('me', [AuthController::class, 'me'])->name('auth.me');
 
 // 로그아웃
 Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');

@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\PageController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/info', function () {
-    phpinfo();
-});
+// welcome page
+Route::get('/', [PageController::class, 'index'])->name('welcome');
+
+// phpinfo
+Route::get('/info', [PageController::class, 'info'])->name('info');

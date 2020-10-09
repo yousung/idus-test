@@ -12,6 +12,8 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $hidden = ['deleted_at'];
+
     protected $casts = [
         'settlement_at' => DateTimeString::class,
         'created_at' => DateTimeString::class,

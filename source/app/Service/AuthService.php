@@ -53,7 +53,7 @@ class AuthService
      */
     public function me(): JsonResponse
     {
-        return makeJson(auth()->user());
+        return makeJson(auth()->user()->load('orders'));
     }
 
 

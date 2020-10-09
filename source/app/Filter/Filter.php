@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filter;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 abstract class Filter
 {
@@ -24,7 +25,7 @@ abstract class Filter
         $this->builder = $builder;
 
         foreach ($this->getFilter() as $filter => $value) {
-            $filter = camel_case($filter);
+            $filter = Str::camel($filter);
             if (method_exists($this, $filter)) {
                 $this->{$filter}($value);
             }
