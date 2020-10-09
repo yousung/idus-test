@@ -25,7 +25,7 @@ $ docker-compose run --rm artisan migrate --seed
 #4. Setting Cache
 $ docker-compose run --rm artisan route:cache
 $ docker-compose run --rm artisan config:cache
-# docker-compose run --rm artisan cache:reset 캐시 초기화
+# docker-compose run --rm artisan cache:clear 캐시 초기화
 
 #5. 확인
 # http://localhost:8080  
@@ -243,4 +243,9 @@ CREATE TABLE `orders` (
 2. Dumy 데이터를 넣을 때 에러나는 경우
 ```shell script
  $ docker-compose run --rm artisan migrate:refresh --seed
+```
+
+3. 라우트나 설정을 변경하여도 적용이 되지 않을 때
+```shell script
+$ docker-compose run --rm artisan cache:clear
 ```
