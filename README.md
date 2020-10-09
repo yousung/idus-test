@@ -6,8 +6,7 @@
  3. Mysql 로컬 port 는 33060 입니다.
  4. 로컬 PC와 PORT충돌 방지를 위해 PHP Port는 연결하지 않았습니다. 
  5. 편의상 설정파일 (.env) 등을 gitignore 에 추가하지 않았습니다.
- 6. DB replication 은 구성할 필요가 없다고하여서 구성은 하지 않고 설정 (.env) 파일에 설정을 남겨두었습니다. 
- (READ_DB_HOST 등등)
+ 6. DB replication 은 구성할 필요가 없다고하여서 구성은 하지 않고 설정 (.env) 파일에 설정을 남겨두었습니다. (READ_DB_HOST)
  7. 테스트 코드는 통합테스트 일부만 작성하였습니다. (유닛테스트 생략 / 회원가입만 테스트) 하였습니다.
  8. 회원 가입시 이메일 인증 및 비밀번호 확인 작업은 생략하였습니다.
 
@@ -23,8 +22,10 @@ $ docker-compose run --rm composer install
 $ docker-compose run --rm artisan migrate --seed 
 # or docker-compose run --rm artisan migrate:refresh --seed
 
-#4. Route Cache
+#4. Setting Cache
 $ docker-compose run --rm artisan route:cache
+$ docker-compose run --rm artisan config:cache
+# docker-compose run --rm artisan cache:reset 캐시 초기화
 
 #5. 확인
 # http://localhost:8080  
