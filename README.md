@@ -49,7 +49,7 @@ GET : /
 GET : /info
 ```
 ##### API
-###### AUTH
+###### AUTH ( idus/source/routes/auth.php )
 ```javascript 1.8
 HEADER COMMON : {
  'Accept' : 'application/json',
@@ -122,7 +122,7 @@ RESULT : {
 ```
 
 
-##### USERS
+##### USERS ( idus/source/routes/auth.php )
 ```javascript 1.8
 HEADER COMMON : {
  'Accept' : 'application/json',
