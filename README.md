@@ -123,7 +123,7 @@ RESULT : {
 ```
 
 
-##### USERS ( idus/source/routes/auth.php )
+##### USERS ( idus/source/routes/api.php )
 ```javascript 1.8
 HEADER COMMON : {
  'Accept' : 'application/json',
