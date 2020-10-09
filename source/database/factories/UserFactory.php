@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -26,9 +27,9 @@ class UserFactory extends Factory
 
         return [
             'name' => $this->faker->name($gender[$randGender]),
-            'nickname' => $this->faker->userName,
+            'nickname' => strtolower($this->faker->colorName),
             'password' => '!password1',
-            'phone' => $this->faker->phoneNumber,
+            'phone' => str_replace('-' , '', $this->faker->phoneNumber),
             'email' => $this->faker->unique()->safeEmail,
             'gender' => rand(0, 1) ? User::GENDER[$randGender] : null,
         ];

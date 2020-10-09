@@ -5,6 +5,9 @@
  2. Mysql 5.7.31
  3. 로컬 PC와 PORT충돌 방지를 위해 PHP Port는 연결하지 않았습니다.
  4. 편의상 설정파일 (.env) 등을 gitignore 에 추가하지 않았습니다.
+ 5. DB replication 은 구성할 필요가 없다고하여서 구성은 하지 않고 설정 (.env) 파일에 설정을 남겨두었습니다. 
+ (READ_DB_HOST 등등)
+ 6. 테스트 코드는 통합테스트 (유닛테스트 생략) 하였습니다.
 
 ### INSTALL
 ```shell script

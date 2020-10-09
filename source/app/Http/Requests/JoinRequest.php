@@ -34,7 +34,7 @@ class JoinRequest extends FormRequest
             'password' => ['required', 'min:10', new Password],
             'phone' => ['required', new IntegerRule, 'unique:users'],
             'email' => 'required|email|unique:users',
-            'gender' => ['sometimes', Rule::in(User::MALE, User::FEMALE)]
+            'gender' => ['nullable', Rule::in(User::MALE, User::FEMALE)]
         ];
     }
 }
