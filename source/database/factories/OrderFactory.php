@@ -25,7 +25,7 @@ class OrderFactory extends Factory
     {
         return [
             'order_id' => Str::random(12),
-            'name' => "{$this->faker->colorName}-" . Str::random(3),
+            'name' => "{$this->faker->colorName}-😀-" . Str::random(3),
             'settlement_at' => $this->faker->dateTimeInInterval('-90 days', '+90 days')
         ];
     }

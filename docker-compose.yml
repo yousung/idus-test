@@ -15,6 +15,7 @@ services:
       MYSQL_USER: idus
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+      TZ: Asia/Seoul
     networks:
       - idus
 
