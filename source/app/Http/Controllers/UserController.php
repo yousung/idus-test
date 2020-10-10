@@ -18,6 +18,11 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * 회원 목록 리스트
+     * @param  UserFilter  $filter
+     * @return JsonResponse
+     */
     public function index(UserFilter $filter):JsonResponse
     {
         return $this->userService->index(User::Filter($filter));
