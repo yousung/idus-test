@@ -40,9 +40,4 @@ abstract class Filter
     {
         return array_filter($this->request->only($this->filters));
     }
-
-    protected function hasFilter($filter): bool
-    {
-        return method_exists($this, $filter) && $this->request->has($filter);
-    }
 }
