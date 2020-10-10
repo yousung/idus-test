@@ -6,7 +6,7 @@ namespace App\Filter;
 
 class UserFilter extends Filter
 {
-    protected array $filters = ['date', 'search'];
+    protected array $filters = ['search'];
 
     public function search($search)
     {
